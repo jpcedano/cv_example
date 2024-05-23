@@ -1,6 +1,6 @@
 import rclpy
 from rclpy.node import Node
-from std_msgs.msg import Image
+from sensor_msgs.msg import Image
 from std_msgs.msg import ByteMultiArray
 from sensor_msgs.msg import CompressedImage
 from cv_bridge import CvBridge
@@ -25,9 +25,9 @@ class CVExample(Node):
 
         dt = 0.01
         self.timer = self.create_timer(dt, self.timer_callback)
-        self.logger().info("CVExample node has been created")
+        self.get_logger().info("CVExample node has been created")
 
-    def camera_callback(self):
+    def camera_callback(self, msg):
         try:
             self.img = self.bridge.imgmsg_to_cv2(self.msg, "bgr8")
             print("Image received")
